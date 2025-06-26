@@ -15,9 +15,12 @@ const Post = require("./models/Post");
 dotenv.config();
 
 const httpServer = require("http").createServer(app);
+
 const io = require("socket.io")(httpServer, {
   cors: {
-    origin: ["http://localhost:3000", "https://post-it-heroku.herokuapp.com"],
+    origin: allowedOrigins,
+    methods: ["GET", "POST"],
+    credentials: true,
   },
 });
 
@@ -37,16 +40,27 @@ httpServer.listen(process.env.PORT || 4000, () => {
 });
 
 app.use(express.json());
-app.use(cors());
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+}));
+
 app.use("/api/posts", posts);
 app.use("/api/users", users);
 app.use("/api/comments", comments);
 app.use("/api/messages", messages);
 
-if (process.env.NODE_ENV == "production") {
-  app.use(express.static(path.join(__dirname, "/client/build")));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.resolve(__dirname, "client", "build")));
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client/build", "index.html"));
-  });
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
+  );
 }
