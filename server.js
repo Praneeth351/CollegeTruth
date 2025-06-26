@@ -14,6 +14,11 @@ const Post = require("./models/Post");
 
 dotenv.config();
 
+const allowedOrigins = [
+  "http://localhost:3000",
+  process.env.CLIENT_URL || "https://your-frontend.onrender.com"
+];
+
 const httpServer = require("http").createServer(app);
 
 const io = require("socket.io")(httpServer, {
@@ -23,6 +28,7 @@ const io = require("socket.io")(httpServer, {
     credentials: true,
   },
 });
+
 
 io.use(authSocket);
 io.on("connection", (socket) => socketServer(socket));
