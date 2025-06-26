@@ -8,4 +8,9 @@ if (!BASE_URL) {
   }
 }
 
+// ✅ Ensure BASE_URL always ends with a slash
+if (!BASE_URL.endsWith("/")) {
+  BASE_URL += "/";
+}
+
 export { BASE_URL };
