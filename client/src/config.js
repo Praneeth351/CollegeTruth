@@ -4,7 +4,7 @@ if (!BASE_URL) {
   if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
     BASE_URL = "http://localhost:4000/";
   } else {
-    BASE_URL = "https://your-backend.onrender.com/";
+    BASE_URL = "https://collegetruth-backend.onrender.com/";
   }
 }
 
