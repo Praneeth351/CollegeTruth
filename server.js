@@ -16,7 +16,7 @@ dotenv.config();
 
 const allowedOrigins = [
   "http://localhost:3000",
-  process.env.CLIENT_URL || "https://your-frontend.onrender.com"
+  process.env.CLIENT_URL
 ];
 
 const httpServer = require("http").createServer(app);

@@ -1,0 +1,2 @@
+ "proxy": "http://localhost:4000"
+is removed from clinet/pacakge.json

@@ -130,10 +130,21 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <Button variant="text" sx={{ minWidth: 80 }} href="/signup">
+              <Button
+                variant="text"
+                sx={{ minWidth: 80 }}
+                component={Link}
+                to="/signup"
+              >
                 Sign Up
               </Button>
-              <Button variant="text" sx={{ minWidth: 65 }} href="/login">
+
+              <Button
+                variant="text"
+                sx={{ minWidth: 65 }}
+                component={Link}
+                to="/login"
+              >
                 Login
               </Button>
             </>
